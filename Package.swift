@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.2
 import PackageDescription
 
 let package = Package(
@@ -10,10 +10,15 @@ let package = Package(
         .library(name: "SwiftChecksDangerPlugin", type: .dynamic, targets: ["SwiftChecksDangerPlugin"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/danger/swift.git", from: "2.0.0"),
+        .package(name: "danger-swift", url: "https://github.com/danger/swift.git", from: "3.0.0"),
     ],
     targets: [
-        .target(name: "SwiftChecksDangerPlugin", dependencies: ["Danger"]),
+        .target(
+            name: "SwiftChecksDangerPlugin",
+            dependencies: [
+                .product(name: "Danger", package: "danger-swift")
+            ]
+        ),
     ],
     swiftLanguageVersions: [.v5]
 )
